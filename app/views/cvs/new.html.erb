@@ -1,0 +1,10 @@
+<h1>Upload your CV</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <%= form_for(@cv) do |f| %>
+      <%= f.file_field :filename, class: "form-control" %>
+      <small>Only files smaller than 10MB and in PDF format are accepted</small><br>
+      <%= f.submit "Upload my CV", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
