@@ -10,4 +10,10 @@ class JobRelationshipsController < ApplicationController
       flash[:danger] = "Only 1 job allowed per CV"
     end
   end
+
+  def destroy
+    @job_relationship = JobRelationship.find_by(params[:cv_id])
+    @job_relationship.delete
+    redirect_to jobs_index_path
+  end
 end

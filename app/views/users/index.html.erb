@@ -22,7 +22,7 @@
     <tr>
       <th scope="col">Username</th>
       <th scope="col">Email</th>
-      <th scope="col">CV Download</th>
+      <th scope="col" colspan="2">CVs</th>
     </tr>
   </thead>
   <% @users.each do |n| %>
@@ -40,7 +40,7 @@
                   <%= hidden_field_tag :cv_id, c.id %>
                   <%= select("job", "job_id", Job.all.collect {|p| [ p.job_name, p.id ] },
                   { prompt: "Select a job" }) %>
-                  <%= f.submit "Submit", class: "btn btn-primary" %>
+                  <%= f.submit "Send CV to Job", class: "btn btn-primary" %>
                 <% end %>
               </td>
             </tr>

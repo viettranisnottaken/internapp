@@ -1,0 +1,52 @@
+<h1>All jobs</h1>
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Job</th>
+          <th scope="col">CV</th>
+        </tr>
+      </thead>
+      <% @jobs.each do |n| %>
+      <tbody>
+        <tr>
+          <td><%= n.job_name %></td>
+          <td>
+            <% n.cvs.each do |c| %>
+            <table>
+              <tr>
+                <td>
+                  <%= link_to "Download this CV", rails_blob_path(c.filename, disposition: 'attachment') %>
+                </td>
+                <td>
+                  <% if c %>
+                    <%= link_to "Detach CV from Job", delete_jobrela_path, method: :delete,
+                        data: {confirm: "Are you sure?"} %>
+                  <% end %>
+                </td>
+              </tr>
+            </table>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <div>
+     <ul class="pagination">
+        <li class="page-item <%= @page == 0 ? 'disabled' : '' %>">
+          <% if @page > 0 %>
+            <%= link_to "<< Previous", jobs_index_path(page: @page - 1), class: "page-link" %>
+          <% end %>
+        </li>
+
+        <li class="page-item">
+          <% if @page <= Job.count % @per_page %>
+            <%= link_to "Next >>", jobs_index_path(page: @page + 1), class: "page-link" %>
+          <% end %>
+        </li>
+     </ul>
+    </div>
+  </div>
+</div>
