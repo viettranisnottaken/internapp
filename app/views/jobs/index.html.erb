@@ -17,7 +17,7 @@
             <table>
               <tr>
                 <td>
-                  <%= link_to "Download this CV", rails_blob_path(c.filename, disposition: 'attachment') %>
+                  <%= link_to "Download #{c.user.username}\'s CV", rails_blob_path(c.filename, disposition: 'attachment') %>
                 </td>
                 <td>
                   <% if c %>
