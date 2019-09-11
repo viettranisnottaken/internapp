@@ -33,20 +33,5 @@
       <% end %>
       </tbody>
     </table>
-    <div>
-     <ul class="pagination">
-        <li class="page-item <%= @page == 0 ? 'disabled' : '' %>">
-          <% if @page > 0 %>
-            <%= link_to "<< Previous", jobs_index_path(page: @page - 1), class: "page-link" %>
-          <% end %>
-        </li>
-
-        <li class="page-item">
-          <% if @page <= Job.count % @per_page %>
-            <%= link_to "Next >>", jobs_index_path(page: @page + 1), class: "page-link" %>
-          <% end %>
-        </li>
-     </ul>
-    </div>
   </div>
 </div>
