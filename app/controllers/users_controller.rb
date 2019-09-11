@@ -15,7 +15,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @user = User.all
+    # @users = User.all
+    # @users_search = User.where([':username LIKE :query OR :email LIKE :query', query: "%#{params[:users_search][:search]}%"])
+    # @users_search = User.where(username: "%#{params[:users_search][:search]}%")
+    if params[:search]
+    @users = User.where('username LIKE :query OR email LIKE :query', query: "%#{params[:search]}%")
+    else
+      @users = User.all
+    end
   end
 
   def show

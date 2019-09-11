@@ -10,3 +10,20 @@
   name = Faker::Job.field
   Job.create(job_name: name)
 end
+
+99.times do |n|
+  username  = Faker::Name.name
+  email = "email-#{n+1}@internapp.com"
+  password = "123456"
+  age = 22
+  phone = Faker::PhoneNumber.cell_phone_with_country_code
+  address = Faker::Address.full_address
+  User.create!(username:  username,
+              email: email,
+              password:              password,
+              password_confirmation: password,
+              age: age,
+              phone_num: phone,
+              address: address
+            )
+end

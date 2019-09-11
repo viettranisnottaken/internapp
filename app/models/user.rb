@@ -8,4 +8,14 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: {minimum: 6}
+
+  private
+
+  def self.search(search)
+    if search
+      where('username LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 end
