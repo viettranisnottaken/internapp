@@ -13,7 +13,9 @@
   </div>
 </div>
 
-<p><%= link_to "Back to users list", users_path %></p>
+<% unless current_page?("http://localhost:3000/users", check_parameters: true) %>
+  <p><%= link_to "Back to users list", users_path %></p>
+<% end %>
 
 <table class="table table-hover">
   <thead class="thead-light">
@@ -30,7 +32,19 @@
       <td><%= n.email %></td>
       <td>
         <% n.cvs.each do |c| %>
-          <p><%= link_to "Download this CV", rails_blob_path(c.filename, disposition: 'attachment') %></p>
+          <table>
+            <tr>
+              <td><%= link_to "Download this CV", rails_blob_path(c.filename, disposition: 'attachment') %></td>
+              <td>
+                <%= form_for(:job_relationship, url: job_relationships_path) do |f| %>
+                  <%= hidden_field_tag :cv_id, c.id %>
+                  <%= select("job", "job_id", Job.all.collect {|p| [ p.job_name, p.id ] },
+                  { prompt: "Select a job" }) %>
+                  <%= f.submit "Submit", class: "btn btn-primary" %>
+                <% end %>
+              </td>
+            </tr>
+          </table>
         <% end %>
       </td>
     </tr>
