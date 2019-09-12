@@ -19,12 +19,14 @@ class UsersController < ApplicationController
     # @users_search = User.where([':username LIKE :query OR :email LIKE :query', query: "%#{params[:users_search][:search]}%"])
     # @users_search = User.where(username: "%#{params[:users_search][:search]}%")
     if params[:search]
-      @page = (params[:page] || 0).to_i
-      @users = User.where('username LIKE :query OR email LIKE :query', query: "%#{params[:search]}%").offset(10 * @page).limit(10)
+      @page = (params[:page] || 1).to_i
+      @users = User.where('username LIKE :query OR email LIKE :query', query: "%#{params[:search]}%").offset(10 * (@page - 1)).limit(10)
+      @total = User.where('username LIKE :query OR email LIKE :query', query: "%#{params[:search]}%").count
     else
-      @page = (params[:page] || 0).to_i
-      @users = User.offset(10 * @page).limit(10)
+      @page = (params[:page] || 1).to_i
+      @users = User.offset(10 * (@page - 1)).limit(10)
       @per_page = @users.count
+      @total = User.count
     end
   end
 
