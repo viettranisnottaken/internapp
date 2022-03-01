@@ -74,7 +74,7 @@ gem "bootstrap", "~> 4.0.0"
 gem "jquery-rails"
 
 #
-gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.12"
 
 # faker
 gem "faker"
